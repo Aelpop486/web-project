@@ -1,11 +1,16 @@
 <?php
 session_start();
 $errors = [];
+
+//serialize let us get the object from session
+//validation
 if (empty($_REQUEST['email'])) $errors['email'] = 'Enter Your Email';
 if (empty($_REQUEST['password'])) $errors['password'] = 'Enter Your Password';
 if (!empty($_REQUEST['email']) && !filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL)) {
     $errors['email'] = 'Input Email Not Correct Please Write @ or .com';
 }
+
+//filtration
 $email = filter_var($_REQUEST['email'], FILTER_SANITIZE_EMAIL);
 $password = htmlspecialchars($_REQUEST['password']);
 if (empty($errors)) {
